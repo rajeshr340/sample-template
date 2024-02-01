@@ -4,8 +4,7 @@ on:
   workflow_dispatch: 
 
 jobs:
-  create_branch_protection_rule:
-    permissions: write-all
+  create_branch_protection_rule:    
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
