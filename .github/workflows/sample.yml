@@ -2,11 +2,10 @@ name: Create Branch Protection Rule
 
 on:
   workflow_dispatch: 
-permissions: 
-  write-all
 
 jobs:
   create_branch_protection_rule:
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -28,8 +27,8 @@ jobs:
 
             # Create branch protection rule
             curl -X PUT \
-              -H "Accept: application/vnd.github.luke-cage-preview+json" \
-              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Accept: application/vnd.github.v3+json" \
+              -H "Authorization: Bearer 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" \
               -d '{
                     "required_status_checks": {
                       "strict": true,
