@@ -43,7 +43,4 @@ jobs:
                   "restrictions": null
                 }'
 
-            echo "Branch protection rule created successfully."
-
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            echo "Branch protection rule created successfully."        
