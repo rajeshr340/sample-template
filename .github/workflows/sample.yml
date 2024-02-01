@@ -47,7 +47,7 @@ jobs:
                       "apps": []
                     }
                   }' \
-              "https://api.github.com/repos/$REPO_OWNER/$REPO_NAME/branches/$BRANCH_PATTERN/protection"
+              "https://api.github.com/repos/$REPO_NAME/branches/$BRANCH_PATTERN/protection"
 
             echo "Branch protection rule created successfully."
 
