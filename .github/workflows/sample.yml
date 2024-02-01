@@ -28,7 +28,7 @@ jobs:
             # Create branch protection rule
             curl -X PUT \
               -H "Accept: application/vnd.github.v3+json" \
-              -H "Authorization: Bearer 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" \
+              -H "Authorization: Bearer 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" \
               -d '{
                     "required_status_checks": {
                       "strict": true,
