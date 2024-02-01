@@ -25,8 +25,6 @@ jobs:
             const allowDeletions = false;
 
             const octokit = new github.GitHub(process.env.GITHUB_TOKEN);
-            #const context = github.context;
-
             const owner = context.repo.owner;
             const repo = context.repo.repo;
 
