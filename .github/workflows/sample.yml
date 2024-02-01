@@ -40,11 +40,7 @@ jobs:
                       "require_code_owner_reviews": '$CODE_OWNERS',
                       "required_approving_review_count": 1
                     },
-                    "restrictions": {
-                      "users": [],
-                      "teams": [],
-                      "apps": []
-                    }
+                    "restrictions": null
                   }' \
               "https://api.github.com/repos/$REPO_NAME/branches/$BRANCH_PATTERN/protection"
 
