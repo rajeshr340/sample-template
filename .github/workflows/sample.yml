@@ -27,7 +27,7 @@ jobs:
             # Create branch protection rule
             curl --location --request PUT 'https://api.github.com/repos/$REPO_NAME/branches/$BRANCH_PATTERN/protection' \
                 --header 'Content-Type: application/json' \
-                --header 'Authorization: Bearer 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' \
+                --header 'Authorization: Bearer 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' \
                 --data '{
                   "required_status_checks": {
                     "strict": true,
