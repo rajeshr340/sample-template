@@ -6,6 +6,7 @@ on:
 jobs:
   create_branch_protection_rule:    
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -27,7 +28,7 @@ jobs:
             # Create branch protection rule
             curl --location --request PUT 'https://api.github.com/repos/$REPO_NAME/branches/$BRANCH_PATTERN/protection' \
                 --header 'Content-Type: application/json' \
-                --header 'Authorization: Bearer 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' \
+                --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
                 --data '{
                   "required_status_checks": {
                     "strict": true,
