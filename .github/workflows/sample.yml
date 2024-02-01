@@ -13,15 +13,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Create branch protection rule
-        uses: actions/git-scripts@v4
-        with:
-          script: |
-            #!/bin/bash
-            set -e
-
+        run: |           
             # Define variables
-            REPO_OWNER=$GITHUB_REPOSITORY_OWNER
-            REPO_NAME=$GITHUB_REPOSITORY
+            REPO_OWNER="${{github.repository_owner}}"
+            REPO_NAME="${{github.repository}}"
             BRANCH_PATTERN="main" # Customize your branch pattern
             REVIEW_REQUIRED=true
             CODE_OWNERS=true
