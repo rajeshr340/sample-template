@@ -6,34 +6,52 @@ permissions:
   write-all
 
 jobs:
-  create-protection-rule:
+  create_branch_protection_rule:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/github-script@v7
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Create branch protection rule
+        uses: actions/git-scripts@v4
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const protectionRule = {
-              pattern: 'main', // Adjust the branch name pattern as needed
-              enforce_admins: true, // Apply protection rules to admins
-              required_pull_request_reviews: {
-                required_approving_review_count: 1,
-                require_code_owner_reviews: true,
-              },
-              restrictions: {
-                users: [], // Restrict direct pushes to matching branches
-                teams: [],
-                apps: [],
-              },
-              required_status_checks: {
-                strict: true,
-                contexts: [                 
-                ],
-              },
-            };
-            github.repos.createOrUpdateBranchProtectionRule({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              branchProtectionRule: protectionRule,
-            });
+            #!/bin/bash
+            set -e
+
+            # Define variables
+            REPO_OWNER=$GITHUB_REPOSITORY_OWNER
+            REPO_NAME=$GITHUB_REPOSITORY
+            BRANCH_PATTERN="main" # Customize your branch pattern
+            REVIEW_REQUIRED=true
+            CODE_OWNERS=true
+            STATUS_CHECKS=true
+            BYPASS_SETTINGS=false
+
+            # Create branch protection rule
+            curl -X PUT \
+              -H "Accept: application/vnd.github.luke-cage-preview+json" \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -d '{
+                    "required_status_checks": {
+                      "strict": true,
+                      "contexts": []
+                    },
+                    "enforce_admins": false,
+                    "required_pull_request_reviews": {
+                      "dismiss_stale_reviews": true,
+                      "require_code_owner_reviews": '$CODE_OWNERS',
+                      "required_approving_review_count": 1
+                    },
+                    "restrictions": {
+                      "users": [],
+                      "teams": [],
+                      "apps": []
+                    }
+                  }' \
+              "https://api.github.com/repos/$REPO_OWNER/$REPO_NAME/branches/$BRANCH_PATTERN/protection"
+
+            echo "Branch protection rule created successfully."
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
