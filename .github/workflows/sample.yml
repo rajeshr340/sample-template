@@ -29,12 +29,11 @@ jobs:
               },
               required_status_checks: {
                 strict: true,
-                contexts: [
-                  'continuous-integration/test', // Replace with your status check contexts
-                  'continuous-integration/lint',
+                contexts: [                  
                 ],
               },
             };
+
             github.repos.createOrUpdateBranchProtectionRule({
               owner: context.repo.owner,
               repo: context.repo.repo,
