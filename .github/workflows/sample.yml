@@ -2,12 +2,14 @@ name: Create Branch Protection Rule
 
 on:
   workflow_dispatch: 
+permissions: 
+  write-all
 
 jobs:
   create-protection-rule:
     runs-on: ubuntu-latest
     steps:
-      - uses: action/checkout@v3
+      - uses: actions/checkout@v3
       - uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
