@@ -12,7 +12,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - uses: actions/github-scripts@v6
+      - uses: actions/github-script@v6
         with:
           cmd: create-branch-protection-rule
           repository: ${{ github.repository }}
