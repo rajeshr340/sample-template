@@ -24,6 +24,7 @@ jobs:
             echo "$REPO_OWNER"
             echo "$REPO_NAME"
             echo "$BRANCH_PATTERN"
+            echo "https://api.github.com/repos/"$REPO_NAME"/branches/"$BRANCH_PATTERN"/protection"
 
             # Create branch protection rule
             curl --location --request PUT 'https://api.github.com/repos/"$REPO_NAME"/branches/"$BRANCH_PATTERN"/protection' \
